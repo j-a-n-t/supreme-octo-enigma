@@ -1,0 +1,19 @@
+version: "3.4"
+services:
+  dbTask:
+    image: "mongo:6-jammy"
+    container_name: "dbTask"
+    ports:
+      - "27020:27017"
+    volumes:
+      - volTask:/data/db
+      - ./scripts/initDB.js:/docker-entrypoint-initdb.d/initDB.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=4dm1n1str4t0r*2023
+      - MONGO_INITDB_DATABASE=dbtask
+    command: [ "--auth" ]
+    restart: always
+volumes:
+  volTask:
+    external: false
